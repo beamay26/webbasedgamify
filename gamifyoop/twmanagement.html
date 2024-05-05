@@ -1,0 +1,675 @@
+			<!DOCTYPE html>
+			<html>
+			<head>
+				<meta charset='utf-8'>
+				<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+				<title>GAMIFYOOP for Teachers</title>
+				<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+				<meta name='viewport' content='width=device-width, initial-scale=1'>
+				<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+				<link rel="stylesheet" href="styles.css">
+				<style>
+					.labs {
+						display: inline-block;
+						width: 100px;
+					}
+
+					.question-cell {
+						max-width: 300px;
+						white-space: normal;
+						word-wrap: break-word;
+					}
+
+					.custom-table-btn {
+						width: 150px;
+					}
+
+					.modal-footer {
+						display: flex;
+						justify-content: flex-start;
+						align-items: center;
+						gap: 10px; /* Adjust the gap as needed */
+					}
+
+					.modal-footer .custom-table-btn{
+						width: 48%;
+						
+					}
+
+				</style>
+			</head>
+			<body>
+			<div id="main"> 
+				<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+					<a class="navbar-brand" href="#">Gamification Platform for Teachers</a>
+				</nav>
+
+				<div id="mySidenav" class="sidenav">
+					<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+					<a href="home.html"><i class="fa fa-fw fa-home"></i>Home</a>
+					<a href="multiplemanagement.html"><i class="fa fa-fw fa-wrench"></i>EasyCodeGame Management</a>
+					<a href="twmanagement.html"><i class="fa fa-fw fa-wrench"></i>TwistCodeGame Management</a>
+					<a href="wordlemanagement.html"><i class="fa fa-fw fa-wrench"></i>WordleCodeGame Management</a>
+					<a href="#"><i class="fa fa-fw fa-envelope"></i>Contact Us</a>
+				</div>
+				
+				<div class="container" onclick="myFunction(this); openNav()">
+					<div class="bar1"></div>
+					<div class="bar2"></div>
+					<div class="bar3"></div>
+				  </div>
+				  <!--<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>-->
+			<!---------------------------------------------------------------------------------------->	 
+				<div class="container mt-4">
+					<h1>Welcome, Teacher Name!</h1>
+				</div>
+
+					<div class="container">
+						<h2>TextTwist Management</h2>
+						<button type="button" class="btn btn-primary my-2 custom-table-btn" data-toggle="modal" data-target="#exampleModalCenter" onClick="FillTboxes(null); Clear()">Add New Record</button>
+						<table class="table">
+							<thead>
+								<tr>
+									<th>No</th>
+									<th>Level</th>
+									<th>Word</th>
+									<th>Question</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody id="tbody1">
+								<!-- Word and question rows will be added dynamically here -->
+							</tbody>
+						</table>
+					</div>
+
+						<!-- Button trigger modal
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" onClick ="FillTboxes(null)">
+						Add New Record
+					</button> -->
+					
+					<!-- Modal starts-->
+					<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLongTitle">TextTwist Management</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								</div>
+								<div class="modal-body">
+									<label class="labs">Level: </label>
+									<input type="text" id="level" size="33"> <br>
+									<label class="labs">Word: </label>
+									<input type="text" id="word" size="33"> <br>
+									<label class="labs">Question: </label>
+									<textarea id="question" rows="4" cols="50"></textarea><br>
+								</div>
+								<div class="modal-footer">
+									<button id = "AddTWButton" type="button" class="btn btn-primary" onclick="AddTW()">Add New Record</button>
+									<button id = "UpdateTWButton" type="button" class="btn btn-secondary my-2 custom-table-btn" onclick="UpdateTW()">Update Record</button>
+									<button id = "DelTWButton" type="button" class="btn btn-danger" onclick="DeleteTW()">Delete Record</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Modal ends-->
+			</div>	
+			</body>
+			</html>
+
+				<footer class="bg-dark text-white text-center py-3 mt-4">
+					<p>&copy; 2023 Gamification Platform</p>
+				</footer>
+
+				<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+				<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+				<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+
+
+
+	<script>
+
+	function myFunction(x) {
+	x.classList.toggle("change");
+	}
+	function openNav() {
+		document.getElementById("mySidenav").style.width = "250px";			
+		document.getElementById("main").style.marginLeft = "250px";
+
+		//document.body.style.backgroundColor = "#518aae";
+	}
+	function closeNav() {	
+		var container = document.querySelector('.container');
+		document.getElementById("mySidenav").style.width = "0";
+		document.getElementById("main").style.marginLeft= "0";
+		document.body.style.backgroundColor = "white";
+		myFunction(container);
+	}
+	
+	function Clear(){
+		document.getElementById('word').value ='';
+		document.getElementById('question').value ='';
+	}
+	
+	function FillTboxes(level, word, question) {
+    // Clear the modal inputs
+    document.getElementById('level').value = level == undefined ? level : '';
+    document.getElementById('word').value = word == undefined && word !== null ? word : '';
+    document.getElementById('question').value = question == undefined ? question : '';
+
+			if (word !== null) {
+
+			
+					// Set the values in the modal inputs
+					document.getElementById('level').value = level;
+					document.getElementById('word').value = word;
+					document.getElementById('question').value = question;
+					
+					// Update the button display based on the presence of word
+					document.getElementById('AddTWButton').style.display = word ? 'none' : 'inline-block';
+					document.getElementById('UpdateTWButton').style.display = word ? 'inline-block' : 'none';
+					document.getElementById('DelTWButton').style.display = word ? 'inline-block' : 'none';
+				}
+	}
+
+var moduleValues = {};
+
+// Define AddTW function
+function AddTW() {
+    console.log("Adding is working properly");
+
+    // Assuming you have references to the modal inputs
+    var levelInput = document.getElementById("level");
+    var wordInput = document.getElementById("word");
+    var questionInput = document.getElementById("question");
+
+    // Assuming you have obtained values from the inputs
+    var levelValue = levelInput.value;
+    var wordValue = wordInput.value;
+    var questionValue = questionInput.value;
+
+	wordValue = wordValue !== undefined && wordValue !== null ? wordValue : '';
+
+    console.log(levelValue);
+    console.log(wordValue);
+	console.log(questionValue);
+
+	moduleValues = {
+            level: levelValue,
+            word: wordValue,
+            question: questionValue
+        };
+
+        // Dispatch an event to signal that values are ready
+        var event = new CustomEvent('valuesReady', { detail: moduleValues });
+        document.dispatchEvent(event);
+
+
+		// Clear the modal inputs after adding the record
+		levelInput.value = '';
+		wordInput.value = '';
+		questionInput.value = '';
+
+		// You might also want to close the modal
+		$('#exampleModalCenter').modal('hide');
+}
+
+
+
+		// Define UpdateTW function
+function UpdateTW() {
+
+    // Assuming you have references to the modal inputs
+    var levelInput = document.getElementById("level");
+    var wordInput = document.getElementById("word");
+    var questionInput = document.getElementById("question");
+
+    // Assuming you have obtained values from the inputs
+    var levelValue = levelInput.value;
+    var wordValue = wordInput.value;
+    var questionValue = questionInput.value;
+	
+	moduleValues = {
+            level: levelValue,
+            word: wordValue,
+            question: questionValue
+        };
+
+	    // Dispatch an event to signal that values are ready
+		var event = new CustomEvent('valuesReady2', { detail: moduleValues });
+        document.dispatchEvent(event);
+
+		// Clear the modal inputs after updating the record
+		levelInput.value = '';
+		wordInput.value = '';
+		questionInput.value = '';
+
+		// You might also want to close the modal
+		$('#exampleModalCenter').modal('hide');
+	}
+
+// Define DeleteTW function
+function DeleteTW() {
+    var levelInput = document.getElementById("level");
+    var wordInput = document.getElementById("word");
+    var questionInput = document.getElementById("question");
+
+    var levelValue = levelInput.value;
+    var wordValue = wordInput.value;
+    var questionValue = questionInput.value;
+
+	moduleValues = {
+            level: levelValue,
+            word: wordValue,
+            question: questionValue
+        };
+
+	    // Dispatch an event to signal that values are ready
+		var event = new CustomEvent('valuesReady3', { detail: moduleValues });
+        document.dispatchEvent(event);		
+		
+		// Clear the modal inputs after updating the record
+		levelInput.value = '';
+		wordInput.value = '';
+		questionInput.value = '';
+
+		// You might also want to close the modal
+		$('#exampleModalCenter').modal('hide');
+
+	}
+
+ </script>
+
+
+
+
+ <script type="module">
+					
+	import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
+	import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-analytics.js";
+	import { getDatabase, ref, child, get, push, set, update, remove, query, orderByChild, equalTo,} from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
+
+	// Initialize Firebase with your configuration
+const firebaseConfig = {
+	apiKey: "AIzaSyDKkWzM4dhRcEisVdME4T7yzz9PkMKMRDk",
+	authDomain: "gamifyoop-42a54.firebaseapp.com",
+	databaseURL: "https://gamifyoop-42a54-default-rtdb.firebaseio.com",
+	projectId: "gamifyoop-42a54",
+	storageBucket: "gamifyoop-42a54.appspot.com",
+	messagingSenderId: "452226927878",
+	appId: "1:452226927878:web:b862362f35d51792d36287",
+	measurementId: "G-MWSGYMJ073"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const WordQuestionPairs = {};
+
+
+// Fetch the question data before calling Select_AllData
+get(ref(db, 'WordQuestionPairs')).then((snapshot) => {
+	if (snapshot.exists()) {
+		snapshot.forEach((childSnapshot) => {
+			const word = childSnapshot.key;
+			const question = childSnapshot.val().question;
+			WordQuestionPairs[word] = { question };
+			
+		});
+	} else {
+		console.log('No question data available');
+	}
+
+
+	Select_AllData();
+	}).catch((error) => {
+		console.error('Error fetching question data:', error);
+	});
+
+
+
+
+
+function Select_AllData() {
+	// Use 'get' function to get data once
+	
+	get(ref(db, 'Solutions')).then((snapshot) => {
+		if (snapshot.exists()) {
+			snapshot.forEach((levelSnapshot) => {
+				const level = levelSnapshot.key;
+
+				levelSnapshot.forEach((wordSnapshot) => {
+					const word = wordSnapshot.val().word;
+
+					// Fetch question from MywordQuestionMap
+					const question = WordQuestionPairs[word] ? WordQuestionPairs[word].question : "";
+
+					// Add the item to the table
+					AddItemTABLE(level, word, question);
+				});
+			});
+		} else {
+			console.log('No data available');
+		}
+	}).catch((error) => {
+		console.error('Error fetching data:', error);
+	});
+}
+
+	////////////////////////////table filling
+	var id = 0;
+
+// Function to add a new row to the table
+function AddItemTABLE(level, word, question) {
+	var wordList = document.getElementById("tbody1");
+
+	// Create a new row
+	var trow = document.createElement("tr");
+
+	// Create cells for each column
+	var td0 = document.createElement("td");
+	var td1 = document.createElement("td");
+	var td2 = document.createElement("td");
+	var td3 = document.createElement("td");
+
+	// Add content to the cells
+	td0.innerHTML = ++id;
+	td1.innerHTML = level;
+	td2.innerHTML = word;
+	td3.innerHTML = question;
+
+	// Append cells to the row
+	trow.appendChild(td0);
+	trow.appendChild(td1);
+	trow.appendChild(td2);
+	trow.appendChild(td3);
+
+	// Add the row to the table
+	wordList.appendChild(trow);
+
+	// Add the class to the question cell
+	td3.classList.add("question-cell");
+
+	// Create controls div
+	var ControlDiv = document.createElement("div");
+	ControlDiv.classList.add("d-sm-flex", "flex-column", "align-items-start");
+
+	// Add buttons to the controls div
+	//ControlDiv.innerHTML = '<button type="button" class="btn btn-primary my-2 custom-table-btn" data-toggle="modal" data-target="#exampleModalCenter" onClick="FillTboxes(null)">Add New Record</button>';
+	ControlDiv.innerHTML += '<button type="button" class="btn btn-secondary my-2 custom-table-btn" data-toggle="modal" data-target="#exampleModalCenter" onClick="FillTboxes(\'' + level + '\', \'' + word + '\', \'' + question + '\')">Edit Record</button>';
+	//ControlDiv.innerHTML += '<button type="button" class="btn btn-danger custom-table-btn" data-toggle="modal" data-target="#exampleModalCenter" onclick="DeleteTW()">Delete Record</button>';
+
+	// Append the controls div to the row
+	trow.appendChild(ControlDiv);
+
+
+}
+
+	document.addEventListener('valuesReady', function (event) {
+        var levelValue = event.detail.level;
+        var wordValue = event.detail.word;
+        var questionValue = event.detail.question;
+        addfunc(levelValue, wordValue, questionValue);
+    });
+
+	document.addEventListener('valuesReady2', function (event) {
+        var levelValue = event.detail.level;
+        var wordValue = event.detail.word;
+        var questionValue = event.detail.question;
+		console.log(levelValue);
+		console.log(wordValue);
+		console.log(questionValue);
+        updatefunc(levelValue, wordValue, questionValue);
+    });
+
+	document.addEventListener('valuesReady3', function (event) {
+        var levelValue = event.detail.level;
+        var wordValue = event.detail.word;
+        var questionValue = event.detail.question;
+		console.log(levelValue);
+		console.log(wordValue);
+		console.log(questionValue);
+        delfunc(levelValue, wordValue, questionValue);
+    });
+
+
+function addfunc(levelValue, wordValue, questionValue) {
+    // Get the reference to the MywordList level
+    var levelRef = ref(db, 'Solutions/' + levelValue);
+
+    // Push a new record under the specified level
+    var newRecordRef = push(levelRef, { word: wordValue });
+
+    // Get the key generated by push and use it to update WordQuestionPairs
+    var newRecordKey = newRecordRef.key;
+    
+    set(ref(db, 'WordQuestionPairs/' + wordValue), { question: questionValue }).then(() => {
+        alert("Data added successfully");
+    }).catch((error) => {
+        alert("Failed to add data. Error: " + error);
+    });
+}
+
+
+// // function updatefunc(levelValue, wordValue, questionValue) {
+// //     // Get the reference to the existing record in MywordList
+// //     var levelRef = ref(db, 'MywordList/' + levelValue);
+
+// //     // Fetch the current data under the specified level
+// //     get(levelRef).then((snapshot) => {
+// //         if (snapshot.exists()) {
+// //             // Iterate through the keys to find the correct key for the word
+// //             let wordKey;
+// //             snapshot.forEach((childSnapshot) => {
+// //                 if (childSnapshot.val().word === wordValue) {
+// //                     wordKey = childSnapshot.key;
+// //                 }
+// //             });
+
+// //             if (wordKey) {
+// //                 var wordRef = ref(db, 'MywordList/' + levelValue + '/' + wordKey);
+
+// //                 // Update the word in MywordList
+// //                 set(wordRef, { word: wordValue }).then(() => {
+// //                     alert("Data updated successfully in MywordList");
+// //                 }).catch((error) => {
+// //                     alert("Failed to update data in MywordList. Error: " + error);
+// //                 });
+
+// //                 // Update the question in MywordQuestionMap
+// //                 set(ref(db, 'MywordQuestionMap/' + wordValue), { question: questionValue }).then(() => {
+// //                     alert("Data updated successfully in MywordQuestionMap");
+// //                 }).catch((error) => {
+// //                     alert("Failed to update data in MywordQuestionMap. Error: " + error);
+// //                 });
+// //             } else {
+// //                 alert("Word not found in the specified level");
+// //             }
+// //         } else {
+// //             alert("Level not found");
+// //         }
+// //     }).catch((error) => {
+// //         console.error('Error fetching data:', error);
+// //     });
+// // }
+
+
+function updatefunc(levelValue, wordValue, questionValue) {
+    // Get the reference to the MywordList level
+    var levelRef = ref(db, 'Solutions/' + levelValue);
+
+    // Fetch the current data under the specified level
+    get(levelRef).then((snapshot) => {
+        if (snapshot.exists()) {
+            // Iterate through the keys to find the correct key for the word
+            let wordKey;
+            snapshot.forEach((childSnapshot) => {
+                if (childSnapshot.val().word === wordValue) {
+                    wordKey = childSnapshot.key;
+                }
+            });
+
+            if (wordKey) {
+                var wordRef = ref(db, 'Solutions/' + levelValue + '/' + wordKey);
+
+                // Update the word in MywordList
+                update(wordRef, { word: wordValue }).then(() => {
+                    alert("Data updated successfully in Solutions");
+                }).catch((error) => {
+                    alert("Failed to update data in Solutions. Error: " + error);
+                });
+
+                // Update the question in MywordQuestionMap
+                set(ref(db, 'WordQuestionPairs/' + wordValue), { question: questionValue }).then(() => {
+                    alert("Data updated successfully in WordQuestionPairs");
+                }).catch((error) => {
+                    alert("Failed to update data in WordQuestionPairs. Error: " + error);
+                });
+            } else {
+                alert("Word not found in the specified level");
+            }
+        } else {
+            alert("Level not found");
+        }
+    }).catch((error) => {
+        console.error('Error fetching data:', error);
+    });
+}
+
+
+//DELETE ALL
+// function delfunc(levelValue, wordValue, questionValue) {
+//     // Get the reference to the MywordList level
+//     var levelRef = ref(db, 'Solutions/' + levelValue);
+
+//     // Remove all words under the specified level
+//     remove(levelRef).then(() => {
+//         alert("All data deleted successfully from MywordList under level " + levelValue);
+//     }).catch((error) => {
+//         alert("Failed to delete data from MywordList. Error: " + error);
+//     });
+
+//     // Remove all corresponding entries in MywordQuestionMap
+//     for (const word of wordsToDelete) {
+//         var questionRef = ref(db, 'MywordQuestionMap/' + word);
+//         remove(questionRef).then(() => {
+//             alert("Data deleted successfully from MywordQuestionMap for word " + word);
+//         }).catch((error) => {
+//             alert("Failed to delete data from MywordQuestionMap. Error: " + error);
+//         });
+//     }
+
+//     // Close the modal
+//     $('#exampleModalCenter').modal('hide');
+// }
+
+
+//LAST CODE
+function delfunc(levelValue, wordValue, questionValue) {
+    // Get the reference to the Solution level
+	console.log(wordValue	);
+    var solutionsRef = ref(db, 'Solutions/' + levelValue);
+    console.log(solutionsRef);
+
+
+    get(solutionsRef).then((snapshot) => {
+        console.log(snapshot.val()); // Add this line for debugging
+        if (snapshot.exists()) {
+            let wordKey = null;
+
+            // Iterate through the keys to find the correct key for the word
+            snapshot.forEach((childSnapshot) => {
+                if (childSnapshot.val().word === wordValue) {
+                    wordKey = childSnapshot.key;
+                }
+            });
+
+            if (wordKey) {
+                var specificWordRef = ref(db, 'Solutions/' + levelValue + '/' + wordKey);
+
+                // Remove the word
+                remove(specificWordRef).then(() => {
+                    console.log("Word deleted successfully!");
+                }).catch((error) => {
+                    console.error('Error deleting word:', error);
+                });
+            } else {
+                alert("Word not found in the specified level");
+            }
+        } else {
+            alert("Level not found");
+        }
+    }).catch((error) => {
+        console.error('Error fetching data:', error);
+    });
+
+
+    // After deleting the word, also remove the corresponding entry in WordQuestionPairs
+    var questionRef = ref(db, 'WordQuestionPairs/' + wordValue);
+    remove(questionRef).then(() => {
+        console.log("Data deleted successfully from WordQuestionPairs");
+    }).catch((error) => {
+        console.error("Failed to delete data from WordQuestionPairs. Error: " + error);
+    });
+
+    // Close the modal
+    $('#exampleModalCenter').modal('hide');
+}
+
+
+// function updatefunc(levelValue, wordValue, questionValue) {
+//     // Assuming you have obtained values from the inputs
+//     var level = levelValue;
+//     var oldWord = wordValue; 
+//     var newWord = "bea2";
+//     var question = questionValue;
+
+//     // Get the reference to the MywordList level
+//     var levelRef = ref(db, 'Solutions/' + level);
+
+//     // Fetch the current data under the specified level
+//     get(levelRef).then((snapshot) => {
+//         if (snapshot.exists()) {
+//             // Iterate through the keys to find the correct key for the word
+//             let wordKey;
+//             snapshot.forEach((childSnapshot) => {
+//                 if (childSnapshot.val().word === oldWord) {
+//                     wordKey = childSnapshot.key;
+//                 }
+//             });
+
+//             if (wordKey) {
+//                 var wordRef = ref(db, 'Solutions/' + level + '/' + wordKey);
+
+//                 // Update the word in Solutions
+//                 update(wordRef, { word: newWord }).then(() => {
+//                     // Update local data
+//                     updateWord(level, oldWord, newWord);
+//                     alert("Data updated successfully in Solutions");
+//                 }).catch((error) => {
+//                     alert("Failed to update data in Solutions. Error: " + error);
+//                 });
+
+//                 // Update the question in WordQuestionPairs
+//                 set(ref(db, 'WordQuestionPairs/' + newWord), { question: question }).then(() => {
+//                     alert("Data updated successfully in WordQuestionPairs");
+//                 }).catch((error) => {
+//                     alert("Failed to update data in WordQuestionPairs. Error: " + error);
+//                 });
+//             } else {
+//                 alert("Word not found in the specified level");
+//             }
+//         } else {
+//             alert("Level not found");
+//         }
+//     }).catch((error) => {
+//         console.error('Error fetching data:', error);
+//     });
+// }
+
+
+
+</script>

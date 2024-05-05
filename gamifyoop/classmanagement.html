@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GAMIFYOOP for Teachers</title>
+
+    <!-- Link to Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="styles.css">
+	
+</head>
+<body>
+<div id="main"> 
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">Gamification Platform for Teachers</a>
+    </nav>
+
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<a href="home.html"><i class="fa fa-fw fa-home"></i>Home</a>
+		<a href="multiplemanagement.html"><i class="fa fa-fw fa-wrench"></i>EasyCodeGame Management</a>
+		<a href="twmanagement.html"><i class="fa fa-fw fa-wrench"></i>TwistCodeGame Management</a>
+		<a href="wordlemanagement.html"><i class="fa fa-fw fa-wrench"></i>WordleCodeGame Management</a>
+		<a href="#"><i class="fa fa-fw fa-envelope"></i>Contact Us</a>
+	  </div>
+	
+	  <div class="container" onclick="myFunction(this); openNav()">
+		<div class="bar1"></div>
+		<div class="bar2"></div>
+		<div class="bar3"></div>
+	  </div>
+	  <!--<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>-->
+<!---------------------------------------------------------------------------------------->	  
+    
+<h1>Welcome, Teacher Name!</h1>
+
+    <div class="container mt-4">
+    <div class ="row">
+      <div class="col-md-6">
+          <div class="card">
+            <div class="card-body">
+               <h2 class="card-title">Create Class</h2>
+            	  <p><label>Class Name</label><input id = "ClassBox" type="text"></p>
+            	  <p><button id ="Insbtn" class="btn btn-primary mt-2">Add Class</button> <button id ="Removebtn" class="btn btn-danger mt-2">Remove Class</button></p>
+             </div>
+           </div>
+        </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">Class List</h2>
+                        	<table class="table">
+                        		<thead>
+                        		<th>Class No</th>
+                        		<th>Class List</th>
+                        		</thead>
+                        		<tbody id = "tbody1"></tbody>
+                        	</table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="bg-dark text-white text-center py-3 mt-4">
+        <p>&copy; 2023 Gamification Platform</p>
+    </footer>
+
+<hr>
+	<script>
+	function myFunction(x) {
+	x.classList.toggle("change");
+	}
+	function openNav() {
+		document.getElementById("mySidenav").style.width = "250px";			
+		document.getElementById("main").style.marginLeft = "250px";
+
+		//document.body.style.backgroundColor = "#518aae";
+	}
+	function closeNav() {	
+		var container = document.querySelector('.container');
+		document.getElementById("mySidenav").style.width = "0";
+		document.getElementById("main").style.marginLeft= "0";
+		document.body.style.backgroundColor = "white";
+		myFunction(container);
+	}
+	</script>
+	<script type="module">
+	  // Import the functions you need from the SDKs you need
+	  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
+	  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-analytics.js";
+	  // TODO: Add SDKs for Firebase products that you want to use
+	  // https://firebase.google.com/docs/web/setup#available-libraries
+
+	  // Your web app's Firebase configuration
+	  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+	  const firebaseConfig = {
+	    apiKey: "AIzaSyDKkWzM4dhRcEisVdME4T7yzz9PkMKMRDk",
+	    authDomain: "gamifyoop-42a54.firebaseapp.com",
+	    databaseURL: "https://gamifyoop-42a54-default-rtdb.firebaseio.com",
+	    projectId: "gamifyoop-42a54",
+	    storageBucket: "gamifyoop-42a54.appspot.com",
+	    messagingSenderId: "452226927878",
+	    appId: "1:452226927878:web:b862362f35d51792d36287",
+	    measurementId: "G-MWSGYMJ073"
+	  };
+
+	  // Initialize Firebase
+	  const app = initializeApp(firebaseConfig);
+	  const analytics = getAnalytics(app);
+	  import {getDatabase, ref, set, get, child, onValue, update, remove}
+	  from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
+	  const db = getDatabase();
+
+	  var classbox = document.getElementById("ClassBox");
+	  var insBtn = document.getElementById("Insbtn");
+	  var removeBtn = document.getElementById("Removebtn");
+	  var classid = [];
+
+	  	insBtn.addEventListener('click', InsertData);
+	 	 removeBtn.addEventListener('click', RemoveData);
+//--------------------------------------------- Insert Data------------------------//
+	  function InsertData(){
+	  	set(ref(db, "ClassCode/"+classbox.value), {
+	  		CreateClass: classbox.value
+	  	})
+	  	.then(()=>{
+	  		alert("data store succesfully");
+	  	})
+	  	.catch((error)=>{
+	  		alert("unsuccesfully stored data, error"+error);
+	  	});
+	  }
+
+
+
+//--------------------------------------------- Select Data------------------------//
+	function SelectData()
+	{
+		const dbref = ref(db);
+
+		get(child(dbref, "ClassCode/"+classbox.value)).then((snapshot)=>{
+			if(snapshot.exists()){
+				classbox.value = snapshot.val().CreateClass;
+			}
+			else{
+				alert("No data found");
+			}
+
+		})		
+	  	.catch((error)=>{
+	  		alert("unsuccesfully stored data, error"+error);
+	  	});
+	}
+
+//--------------------------------------------- Update Data------------------------//
+	  function UpdateData(){
+	  	update(ref(db, "ClassCode/"+classbox.value), {
+	  		CreateClass: classbox.value
+	  	})
+	  	.then(()=>{
+	  		alert("data updated succesfully");
+	  	})
+	  	.catch((error)=>{
+	  		alert("unsuccesfully updated data, error"+error);
+	  	});
+	  }
+//--------------------------------------------- Delete Data------------------------//
+	  function RemoveData(){
+	  	remove(ref(db, "ClassCode/"+classbox.value))
+	  	.then(()=>{
+	  		alert("data removed succesfully");
+	  	})
+	  	.catch((error)=>{
+	  		alert("unsuccesfully deleted data, error"+error);
+	  	});
+	  }
+
+//--------------------------------------------- Filling Data------------------------//
+	var classno = 0;
+	var tbody = document.getElementById('tbody1');
+	function AddItemToTable(ClassCode){
+		let trow = document.createElement("tr");
+		let td1 = document.createElement('td');
+		let td2 = document.createElement('td');
+
+		td1.innerHTML = ++classno;
+		td2.innerHTML = ClassCode;
+
+		trow.appendChild(td1);
+ 		trow.appendChild(td2); 
+		
+		tbody.appendChild(trow);
+	}
+
+	function AddAllItemsToTable(ClassCode){
+		classno = 0;
+		tbody.innerHTML = "";
+		ClassCode.forEach((element) => {
+			AddItemToTable(element.CreateClass);	
+		});
+	}
+	
+	function GetAllDataOnce(){
+		const dbRef = ref(db);
+
+		get(child(dbRef, "ClassCode"))
+		.then((snapshot)=>{
+			//var classid = [];
+			snapshot.forEach(childSnapshot => {
+				classid.push(childSnapshot.val());
+			});	
+			AddAllItemsToTable(students);
+		});
+	}
+
+	function GetAllDataRealtime(){
+		const dbRef = ref(db, "ClassCode");
+
+		onValue(dbRef,(snapshot) => {
+			classid = [];  // Clear the array before populating it
+			snapshot.forEach((childSnapshot) => {
+				classid.push(childSnapshot.val());
+			});	
+			AddAllItemsToTable(classid);
+		})
+	}
+
+	/*window.onload = GetAllDataRealtime;*/
+
+//--------------------------------------------- Filling Student Progress------------------------//	
+	var studentNo = 0;
+	function AddItemToTable2(userData) {
+	    let trow = document.createElement("tr");
+	    let td1 = document.createElement('td');
+	    let td2 = document.createElement('td');
+	    let td3 = document.createElement('td');
+	    let td4 = document.createElement('td');
+	    let td5 = document.createElement('td');
+
+	    td1.innerHTML = ++studentNo; // Increment student number
+	    td2.innerHTML = userData.username;
+	    td3.innerHTML = userData.score3; // EasyCode Game
+	    td4.innerHTML = userData.score;  // TwistCode Game
+	    td5.innerHTML = userData.score2; // WordleCode Game
+
+	    trow.appendChild(td1);
+	    trow.appendChild(td2);
+	    trow.appendChild(td3);
+	    trow.appendChild(td4);
+	    trow.appendChild(td5);
+
+	    const tbody2 = document.getElementById('tbody2');
+	    tbody2.appendChild(trow);
+	}
+
+	function AddAllUsersToTable(usersData) {
+	    studentNo = 0; // Reset the student number when repopulating the table
+	    const tbody2 = document.getElementById('tbody2');
+	    
+	    // Clear the existing table content
+	    tbody2.innerHTML = "";
+
+	    for (const userId in usersData) {
+	        const userData = usersData[userId];
+	        AddItemToTable2(userData);
+	    }
+	}
+
+	function GetAllUserScores() {
+	  const usersRef = ref(db, "Users");
+
+	  onValue(usersRef, (snapshot) => {
+	    const usersData = snapshot.val();
+	    AddAllUsersToTable(usersData);
+	  });
+	}
+
+	/*window.onload = GetAllUserScores;*/
+	window.onload = function () {
+	    GetAllDataRealtime();
+	    GetAllUserScores();
+	};
+
+
+	    // Define a single function that combines the two functions you want to run on load
+	    function onWindowLoad() {
+	        GetAllDataRealtime();
+	        GetAllUserScores();
+	    }
+
+	    window.onload = onWindowLoad;
+
+
+
+	</script>
+	    <!-- Link to Bootstrap JavaScript and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</div>
+</body>
+</html>

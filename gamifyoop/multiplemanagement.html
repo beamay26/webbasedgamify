@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+	<title>GAMIFYOOP for Teachers</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<meta name='viewport' content='width=device-width, initial-scale=1'>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="styles.css">
+	<style>
+				
+		.labs {
+			display: inline-block;
+			width: 120px;
+		}
+
+		.question-cell {
+			max-width: 300px;
+			white-space: normal;
+			word-wrap: break-word;
+		}
+
+		.custom-table-btn {
+			width: 150px;
+		}
+
+		.modal-footer {
+			display: flex;
+			justify-content: flex-start;
+			align-items: center;
+			gap: 10px; /* Adjust the gap as needed */
+		}
+
+		.modal-footer .custom-table-btn{
+			width: 48%;
+			
+		}
+
+	</style>
+</head>
+<body>
+<div id="main"> 
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">Gamification Platform for Teachers</a>
+    </nav>
+
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav(); myFunction(this)">&times;</a>
+		<a href="home.html"><i class="fa fa-fw fa-home"></i>Home</a>
+		<a href="multiplemanagement.html"><i class="fa fa-fw fa-wrench"></i>EasyCodeGame Management</a>
+		<a href="twmanagement.html"><i class="fa fa-fw fa-wrench"></i>TwistCodeGame Management</a>
+		<a href="wordlemanagement.html"><i class="fa fa-fw fa-wrench"></i>WordleCodeGame Management</a>
+		<a href="#"><i class="fa fa-fw fa-envelope"></i>Contact Us</a>
+	  </div>
+	
+	  <div class="container" onclick="myFunction(this); openNav()">
+		<div class="bar1"></div>
+		<div class="bar2"></div>
+		<div class="bar3"></div>
+	  </div>
+	  <!--<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>-->
+<!---------------------------------------------------------------------------------------->	  
+
+	<div class="container mt-4">
+        <h1>Welcome, Teacher Name!</h1>
+    </div>
+
+	    <div class="container">
+			<h2>Multiple Choice Management</h2>
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" onclick="FillTboxes(null)">Add Record</button>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>No</th>
+						<th>Level</th>
+						<th>Question</th>
+						<th>Options</th>
+						<th>Correct Answers</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody id="tbody1">
+					<!-- Word and question rows will be added dynamically here -->
+				</tbody>
+			</table>
+		</div>
+
+			<!-- Button trigger modal
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" onClick ="FillTboxes(null)">
+			Add New Record
+		</button> -->
+		
+		<!-- Modal starts-->
+		<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Multiple Choice Management</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					</div>
+					<div class="modal-body">
+						<label class="labs">Level: </label><br>
+						<input type="text" id="level" size="48"> <br>
+						<label class="labs">Question: </label>
+						<!--<input type="text" id="question"> <br>-->
+						<textarea id="question" rows="4" cols="50"></textarea><br>
+						<label class="labs">Options: </label><br>
+						<input type="text" class="options" size="48"> <br>
+						<input type="text" class="options" size="48"> <br>
+						<input type="text" class="options" size="48"> <br>
+						<input type="text" class="options" size="48"> <br>
+						<label class="labs">Correct Answer: </label><br>
+						<input type="text" id="correctAns" size="48"> <br>
+						<input type="hidden" id="questionKey" value="">
+					</div>
+					<div class="modal-footer">
+						<button id = "AddMCButton" type="button" class="btn btn-primary" onclick="AddTW()">Add New Record</button>
+						<button id = "UpdateMCButton" type="button" class="btn btn-secondary my-2 custom-table-btn" onclick="UpdateTW()">Update Record</button>
+						<button id = "DelMCButton" type="button" class="btn btn-danger" onclick="DeleteTW()">Delete Record</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Modal ends-->
+	
+
+    <footer class="bg-dark text-white text-center py-3 mt-4">
+        <p>&copy; 2023 Gamification Platform</p>
+    </footer>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+
+	<script type="module">
+		
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-analytics.js";
+		import { getDatabase, ref, get, push, set, update, remove } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
+
+        // Initialize Firebase with your configuration
+	  const firebaseConfig = {
+	    apiKey: "AIzaSyDKkWzM4dhRcEisVdME4T7yzz9PkMKMRDk",
+	    authDomain: "gamifyoop-42a54.firebaseapp.com",
+	    databaseURL: "https://gamifyoop-42a54-default-rtdb.firebaseio.com",
+	    projectId: "gamifyoop-42a54",
+	    storageBucket: "gamifyoop-42a54.appspot.com",
+	    messagingSenderId: "452226927878",
+	    appId: "1:452226927878:web:b862362f35d51792d36287",
+	    measurementId: "G-MWSGYMJ073"
+	  };
+
+
+	const app = initializeApp(firebaseConfig);
+	const database = getDatabase();
+
+	
+
+
+        // Fetch and display questions
+        function displayQuestions() {
+            const tbody = document.getElementById('tbody1');
+            get(ref(database, 'categories')).then((snapshot) => {
+                let id = 0;
+                snapshot.forEach((levelSnapshot) => {
+                    const level = levelSnapshot.key;
+                    const questions = levelSnapshot.child('questions').val();
+
+                    if (questions) {
+                        for (const questionKey in questions) {
+                            const question = questions[questionKey];
+                            AddItemTABLE(++id, level, question.questionInfo, question.options, question.correctAns);
+                        }
+                    }
+                });
+            });
+        }
+
+    function AddItemTABLE(id, level, question, options, correctAns) {
+        const tbody = document.getElementById('tbody1');
+        const trow = document.createElement('tr');
+
+        trow.innerHTML = `
+            <td>${id}</td>
+            <td>${level}</td>
+            <td class="question-cell">${question}</td>
+            <td>${options.join(', ')}</td>
+            <td>${correctAns}</td>
+            <td>
+                <button type="button" class="btn btn-secondary my-2 custom-table-btn" data-toggle="modal" data-target="#exampleModalCenter" onclick="FillTboxes('${level}', '${question}', '${options}', '${correctAns}')">Edit Record</button>
+             <!--<button type="button" class="btn btn-danger my-2 custom-table-btn" onclick="DeleteRecord('${level}', '${question}')">Delete Record</button>-->
+            </td>
+        `;
+
+        tbody.appendChild(trow);
+
+	}
+
+	document.addEventListener('valuesReady', function (event) {
+		var levelInput = event.detail.level;
+		var questionInput = event.detail.question;
+		var correctAnsInput = event.detail.correctAns;
+		var optionsArray = event.detail.options;
+		addfunc(levelInput, questionInput, correctAnsInput, optionsArray);
+	});
+
+	document.addEventListener('valuesReady2', function (event) {
+		var levelInput = event.detail.level;
+		var questionInput = event.detail.question;
+		var correctAnsInput = event.detail.correctAns;
+		var optionsArray = event.detail.options;
+		// var questionKey = event.detail.question;
+
+			console.log(levelInput);
+			console.log(questionInput);
+			console.log(optionsArray);
+			console.log(correctAnsInput);
+		updatefunc(levelInput, questionInput, optionsArray, correctAnsInput);
+	});
+
+	document.addEventListener('valuesReady3', function (event) {
+		var levelInput = event.detail.level;
+		var questionInput = event.detail.question;
+		delfunc(levelInput, questionInput);
+	});
+
+	function addfunc(level, question, correctAns, options) {
+    const questionsRef = ref(database, `categories/${level}/questions`);
+    const newQuestionRef = push(questionsRef); // Get a new push key
+    const questionKey = newQuestionRef.key;
+
+		set(ref(database, `categories/${level}/questions/${questionKey}`), {
+			questionInfo: question,
+			correctAns,
+			options: options, // Assuming options is an array
+
+		});
+	}	
+
+	// function updatefunc(level, question, options, correctAns, questionKey) {
+	// 	// Create a reference to the specific question
+	// 	const questionRef = ref(database, `categories/${level}/questions/${questionKey}`);
+
+	// 	// Update the question record
+	// 	update(questionRef, {
+	// 		questionInfo: question,
+	// 		options: options,
+	// 		correctAns: correctAns
+	// 	});
+	// }
+
+	function updatefunc(level, question, options, correctAns) {
+		var questionsRef = ref(database, `categories/${level}/questions`);
+
+		// Fetch the current data under the specified level
+		get(questionsRef).then((snapshot) => {
+			if (snapshot.exists()) {
+				let questionKey = null;
+
+				// Iterate through the keys to find the correct key for the question
+				snapshot.forEach((childSnapshot) => {
+					if (childSnapshot.val().questionInfo === question) {
+						questionKey = childSnapshot.key;
+					}
+				});
+
+				if (questionKey) {
+					var questionRef = ref(database, `categories/${level}/questions/${questionKey}`);
+
+					update(questionRef, {
+						questionInfo: question,
+						options: options,
+						correctAns: correctAns
+					});
+				} else {
+					alert("Question not found in the specified level");
+				}
+			} else {
+				alert("Level not found");
+			}
+		}).catch((error) => {
+			console.error('Error fetching data:', error);
+		});
+	}
+
+
+	function delfunc(level, question) {
+		var questionsRef = ref(database, `categories/${level}/questions`);
+		console.log(questionsRef);
+		// Fetch the current data under the specified level
+		get(questionsRef).then((snapshot) => {
+			if (snapshot.exists()) {
+				let questionKey = null;
+
+				// Iterate through the keys to find the correct key for the question
+				snapshot.forEach((childSnapshot) => {
+					if (childSnapshot.val().questionInfo === question) {
+						questionKey = childSnapshot.key;
+					}
+				});
+
+				if (questionKey) {
+					var questionRef = ref(database, `categories/${level}/questions/${questionKey}`);
+
+					// Remove the question
+					remove(questionRef).then(() => {
+						console.log("Question deleted successfully!");
+					}).catch((error) => {
+						console.error('Error deleting question:', error);
+					});
+				} else {
+					alert("Question not found in the specified level");
+				}
+			} else {
+				alert("Level not found");
+			}
+		}).catch((error) => {
+			console.error('Error fetching data:', error);
+		});
+	}
+
+
+    // Call the function to display questions when the page loads
+    displayQuestions();
+
+
+</script>
+
+<script>
+	function myFunction(x) {
+	x.classList.toggle("change");
+	}
+	function openNav() {
+		document.getElementById("mySidenav").style.width = "250px";			
+		document.getElementById("main").style.marginLeft = "250px";
+
+		//document.body.style.backgroundColor = "#518aae";
+	}
+	function closeNav() {	
+		var container = document.querySelector('.container');
+		document.getElementById("mySidenav").style.width = "0";
+		document.getElementById("main").style.marginLeft= "0";
+		document.body.style.backgroundColor = "white";
+		myFunction(container);
+	}
+
+	function FillTboxes(level, question, options, correctAns) {
+		document.getElementById('level').value = level;
+		document.getElementById('question').value = question || '';
+		// Select all elements with the class 'options'
+		const optionsInputs = document.getElementsByClassName('options');
+
+		// Split the options string into an array using commas
+		const optionsArray = (options || '').split(',');
+
+		// Iterate over optionsInputs and set their values
+		for (let i = 0; i < optionsInputs.length; i++) {
+			optionsInputs[i].value = optionsArray[i] || '';
+		}
+			document.getElementById('correctAns').value = correctAns || '';
+
+
+			document.getElementById('AddMCButton').style.display = question ? 'none' : 'inline-block'; 
+			document.getElementById('UpdateMCButton').style.display = question ? 'inline-block' : 'none'; 
+			document.getElementById('DelMCButton').style.display = question ? 'inline-block' : 'none';
+	}
+
+	var moduleValues = {};
+
+	function AddTW() {
+		var levelInput = document.getElementById('level').value;			
+		var questionInput = document.getElementById('question').value;
+
+		var correctAnsInput = document.getElementById('correctAns').value;
+		var questionKey = question;
+
+		// Select all elements with the class 'options'
+		var optionsInputs = document.getElementsByClassName('options');
+
+		// Create an array to store options
+		var optionsArray = [];
+			
+		// Iterate over optionsInputs and add each value to the array
+		for (let i = 0; i < optionsInputs.length; i++) {
+			optionsArray.push(optionsInputs[i].value.trim());
+		}
+
+		console.log(levelInput);
+		console.log(questionInput);
+		console.log(optionsArray);
+		console.log(correctAnsInput);
+
+		moduleValues = {
+			level: levelInput,
+			question: questionInput,
+			correctAns: correctAnsInput,
+			options: optionsArray
+			
+		};
+
+		// Dispatch an event to signal that values are ready
+		var event = new CustomEvent('valuesReady', { detail: moduleValues });
+		document.dispatchEvent(event);
+
+		// Close the modal
+		$('#exampleModalCenter').modal('hide');
+		}
+
+	function UpdateTW() {
+
+
+		var levelInput = document.getElementById('level').value;			
+		var questionInput = document.getElementById('question').value;
+
+		// Select all elements with the class 'options'
+		var optionsInputs = document.getElementsByClassName('options');
+
+		// Create an array to store options
+		var optionsArray = [];
+			
+		// Iterate over optionsInputs and add each value to the array
+		for (let i = 0; i < optionsInputs.length; i++) {
+			optionsArray.push(optionsInputs[i].value.trim());
+		}
+
+		var correctAnsInput = document.getElementById('correctAns').value;
+		//var questionKey = question;
+
+		console.log(levelInput);
+		console.log(questionInput);
+		console.log(optionsArray);
+		console.log(correctAnsInput);
+
+		moduleValues = {
+			level: levelInput,
+			question: questionInput,
+			options: optionsArray,
+			correctAns: correctAnsInput
+		};
+
+		// Dispatch an event to signal that values are ready
+		var event = new CustomEvent('valuesReady2', { detail: moduleValues });
+		document.dispatchEvent(event);
+
+		// Close the modal
+		$('#exampleModalCenter').modal('hide');
+		
+	}
+
+	function DeleteTW() {
+		var levelInput = document.getElementById('level').value;			
+		var questionInput = document.getElementById('question').value;
+
+		moduleValues = {
+			level: levelInput,
+			question: questionInput,
+		};
+
+		
+		// Dispatch an event to signal that values are ready
+		var event = new CustomEvent('valuesReady3', { detail: moduleValues });
+		document.dispatchEvent(event);
+
+		// Close the modal
+		$('#exampleModalCenter').modal('hide');
+    }
+
+ 
+
+    function DeleteRecord(level, question) {
+        // Implement the delete logic here
+        // You need to find the specific question key and remove it from the database
+    }
+
+ </script>
+</div> 
+</body>
+</html>
