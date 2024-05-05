@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Analytics Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1em;
+            text-align: center;
+            font-size: 1.5em;
+        }
+        main {
+            margin: 20px;
+        }
+        h2 {
+            color: #4CAF50;
+        }
+        .score-card {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px;
+            text-align: center;
+        }
+        canvas {
+            max-width: 500px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Student Analytics Dashboard
+    </header>
+    <main>
+        <h2>Student: beaorig</h2>
+
+        <div class="score-card">
+            <h3>Multiple Choice</h3>
+            <canvas id="mcChart"></canvas>
+            <p>Total Score: 30</p>
+        </div>
+
+        <div class="score-card">
+            <h3>Text Twist</h3>
+            <canvas id="textTwistChart"></canvas>
+            <p>Total Score: 40</p>
+        </div>
+
+        <div class="score-card">
+            <h3>Wordle</h3>
+            <canvas id="wordleChart"></canvas>
+            <p>Total Score: 20</p>
+        </div>
+    </main>
+
+    <script>
+        // Sample data
+        const mcData = {
+            labels: ["Level1 - Basic Concept", "Level2 - Variables"],
+            datasets: [{
+                label: "Scores",
+                data: [2, 2],
+                backgroundColor: ["rgba(75, 192, 192, 0.2)", "rgba(255, 99, 132, 0.2)"],
+                borderColor: ["rgba(75, 192, 192, 1)", "rgba(255, 99, 132, 1)"],
+                borderWidth: 1
+            }]
+        };
+
+        const textTwistData = {
+            labels: ["Level 1", "Level 2"],
+            datasets: [{
+                label: "Scores",
+                data: [4, 2],
+                backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(75, 192, 192, 0.2)"],
+                borderColor: ["rgba(255, 99, 132, 1)", "rgba(75, 192, 192, 1)"],
+                borderWidth: 1
+            }]
+        };
+
+        const wordleData = {
+            labels: ["Level 1", "Level 2"],
+            datasets: [{
+                label: "Scores",
+                data: [6, 2],
+                backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(75, 192, 192, 0.2)"],
+                borderColor: ["rgba(255, 99, 132, 1)", "rgba(75, 192, 192, 1)"],
+                borderWidth: 1
+            }]
+        };
+
+        // Create charts
+        const mcChartCanvas = document.getElementById('mcChart').getContext('2d');
+        new Chart(mcChartCanvas, {
+            type: 'bar',
+            data: mcData,
+        });
+
+        const textTwistChartCanvas = document.getElementById('textTwistChart').getContext('2d');
+        new Chart(textTwistChartCanvas, {
+            type: 'bar',
+            data: textTwistData,
+        });
+
+        const wordleChartCanvas = document.getElementById('wordleChart').getContext('2d');
+        new Chart(wordleChartCanvas, {
+            type: 'bar',
+            data: wordleData,
+        });
+    </script>
+</body>
+</html>

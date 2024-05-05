@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GAMIFYOOP for Teachers</title>
+
+    <!-- Link to Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="styles.css">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <styles>
+
+    </styles>
+	
+</head>
+<body>
+<div id="main"> 
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">Gamification Platform for Teachers</a>
+    </nav>
+
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<a href="home.html"><i class="fa fa-fw fa-home"></i>Home</a>
+		<a href="multiplemanagement.html"><i class="fa fa-fw fa-wrench"></i>EasyCodeGame Management</a>
+		<a href="twmanagement.html"><i class="fa fa-fw fa-wrench"></i>TwistCodeGame Management</a>
+		<a href="wordlemanagement.html"><i class="fa fa-fw fa-wrench"></i>WordleCodeGame Management</a>
+		<a href="#"><i class="fa fa-fw fa-envelope"></i>Contact Us</a>
+	  </div>
+	
+	  <div class="container" onclick="myFunction(this); openNav()">
+		<div class="bar1"></div>
+		<div class="bar2"></div>
+		<div class="bar3"></div>
+	  </div>
+	  <!--<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>-->
+<!---------------------------------------------------------------------------------------->	  
+    
+<h1>Welcome, Teacher Name!</h1>
+<div class="container mt-4">
+    <div class="row">	
+        <div class="col-md-6">
+            <h2>Total Number of Students Who are Enrolled in the GAMIFY OOP: <span id="totalStudentsCount">0</span></h2>
+            <canvas id="averageScoresChart" class="my-chart-canvas" width="80" height="50"></canvas>
+
+        </div>
+
+        <div class="col-md-6">
+            <h2>Total Number of Students Who are Enrolled in the GAMIFY OOP: <span id="totalStudentsCount">0</span></h2>
+            <canvas id="averageScoresChart2" class="my-chart-canvas" width="80" height="50"></canvas>
+
+        </div>
+    </div>
+</div> 
+    <div class="container mt-4">
+        <div class="row">	
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">Class Leaderboard</h2>
+                        	<table class="table">
+                        		<thead>
+                        		<th>Student No</th>
+                        		<th>Player Name</th>
+                        		<th>EasyCode Game</th>
+                        		<th>TwistCode Game</th>
+                        		<th>WordleCode Game</th>
+                        		</thead>
+                        		<tbody id = "tbody2"></tbody>
+                        	</table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">Students Progress</h2>
+                        <ol>
+                            <li>JohnDoe123 - 2500 Points</li>
+                            <li>GamerGirl456 - 2200 Points</li>
+                            <li>PlayerX - 2000 Points</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <h2>Student Achievements</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="" alt="EasyCode Game Highest Score" class="card-img-top">
+                    <div class="card-body">
+                        <p class="card-text" id="easyCodeAchievement"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="" alt="TwistCode Game Highest Score" class="card-img-top">
+                    <div class="card-body">
+                        <p class="card-text" id="twistCodeAchievement"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="" alt="WordleCode Game Highest Score" class="card-img-top">
+                    <div class="card-body">
+                         <p class="card-text" id="wordleCodeAchievement"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ... Your existing HTML code ... -->
+
+    <div class="container mt-4">
+        <h2>Student Achievements</h2>
+        <div class="row">
+            <!-- EasyCode Game Top Achievements -->
+            <div class="col-md-4" id="easyCodeAchievement">
+                <!-- Top EasyCode achievements will be displayed here dynamically -->
+            </div>
+    
+            <!-- TwistCode Game Top Achievements -->
+            <div class="col-md-4" id="twistCodeAchievement">
+                <!-- Top TwistCode achievements will be displayed here dynamically -->
+            </div>
+    
+            <!-- WordleCode Game Top Achievements -->
+            <div class="col-md-4" id="wordleCodeAchievement">
+                <!-- Top WordleCode achievements will be displayed here dynamically -->
+            </div>
+        </div>
+    </div>
+
+<!-- ... Your existing HTML code ... -->
+
+
+    <footer class="bg-dark text-white text-center py-3 mt-4">
+        <p>&copy; 2023 Gamification Platform</p>
+    </footer>
+
+<hr>
+	<script>
+	function myFunction(x) {
+	x.classList.toggle("change");
+	}
+	function openNav() {
+		document.getElementById("mySidenav").style.width = "250px";			
+		document.getElementById("main").style.marginLeft = "250px";
+
+		//document.body.style.backgroundColor = "#518aae";
+	}
+	function closeNav() {	
+		var container = document.querySelector('.container');
+		document.getElementById("mySidenav").style.width = "0";
+		document.getElementById("main").style.marginLeft= "0";
+		document.body.style.backgroundColor = "white";
+		myFunction(container);
+	}
+	</script>
+
+
+
+
+	<script type="module">
+	  // Import the functions you need from the SDKs you need
+	  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
+	  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-analytics.js";
+	  // TODO: Add SDKs for Firebase products that you want to use
+	  // https://firebase.google.com/docs/web/setup#available-libraries
+
+	  // Your web app's Firebase configuration
+	  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+	  const firebaseConfig = {
+	    apiKey: "AIzaSyDKkWzM4dhRcEisVdME4T7yzz9PkMKMRDk",
+	    authDomain: "gamifyoop-42a54.firebaseapp.com",
+	    databaseURL: "https://gamifyoop-42a54-default-rtdb.firebaseio.com",
+	    projectId: "gamifyoop-42a54",
+	    storageBucket: "gamifyoop-42a54.appspot.com",
+	    messagingSenderId: "452226927878",
+	    appId: "1:452226927878:web:b862362f35d51792d36287",
+	    measurementId: "G-MWSGYMJ073"
+	  };
+
+	  // Initialize Firebase
+	  const app = initializeApp(firebaseConfig);
+	  const analytics = getAnalytics(app);
+	  import {getDatabase, ref, set, get, child, onValue, update, remove}
+	  from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
+	  const db = getDatabase();
+
+///////////////////////////////////////////////
+
+// ... Your existing JavaScript code ...
+
+// ... Your existing JavaScript code ...
+
+function UpdateAchievements(achievements) {
+    // Check if 'achievements' or 'easyCode' property is null or undefined
+    if (achievements && achievements.easyCode) {
+        // Update EasyCode Game Achievement
+        UpdateCard('easyCodeAchievement', achievements.easyCode);
+    } else {
+        // Handle the case where 'easyCode' is null or undefined
+        console.error("EasyCode achievement is null or undefined");
+    }
+
+    // Repeat similar checks for 'twistCode' and 'wordleCode'
+
+    // Update TwistCode Game Achievement
+    if (achievements && achievements.twistCode) {
+        UpdateCard('twistCodeAchievement', achievements.twistCode);
+    } else {
+        console.error("TwistCode achievement is null or undefined");
+    }
+
+    // Update WordleCode Game Achievement
+    if (achievements && achievements.wordleCode) {
+        UpdateCard('wordleCodeAchievement', achievements.wordleCode);
+    } else {
+        console.error("WordleCode achievement is null or undefined");
+    }
+}
+
+
+function UpdateCard(containerId, achievement) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = ""; // Clear existing content
+
+    if (achievement) {
+        const card = document.createElement('div');
+        card.className = 'card mb-3';
+
+        const cardBody = document.createElement('div');
+        cardBody.className = 'card-body';
+
+        const cardText = document.createElement('p');
+        cardText.className = 'card-text';
+        cardText.innerHTML = `<strong>${achievement.username}</strong> - ${achievement.score} Points`;
+
+        cardBody.appendChild(cardText);
+        card.appendChild(cardBody);
+        container.appendChild(card);
+    } else {
+        const noAchievementText = document.createElement('p');
+        noAchievementText.className = 'card-text';
+        noAchievementText.textContent = "No achievement yet.";
+
+        container.appendChild(noAchievementText);
+    }
+}
+
+function GetTopAchievements() {
+    const achievementsRef = ref(db, "TopAchievements");
+
+    onValue(achievementsRef, (snapshot) => {
+        const achievements = snapshot.val();
+        UpdateAchievements(achievements);
+    });
+}
+
+
+
+
+function GetTopStudentAchievements() {
+    const usersRef = ref(db, "Users");
+
+    onValue(usersRef, (snapshot) => {
+        const usersData = snapshot.val();
+
+        // Find top students for each game
+        const topStudentsEasyCode = findTopStudents(usersData, 'score3');
+        const topStudentsTwistCode = findTopStudents(usersData, 'score');
+        const topStudentsWordleCode = findTopStudents(usersData, 'score2');
+
+        // Update the DOM with the top student achievements
+        updateTopStudentAchievement('easyCodeAchievement', topStudentsEasyCode, 'EasyCode');
+        updateTopStudentAchievement('twistCodeAchievement', topStudentsTwistCode, 'TwistCode');
+        updateTopStudentAchievement('wordleCodeAchievement', topStudentsWordleCode, 'WordleCode');
+    });
+}
+
+// Helper function to find top students for a specific game
+function findTopStudents(usersData, gameScoreField) {
+    const sortedStudents = Object.entries(usersData)
+        .filter(([_, userData]) => userData[gameScoreField] !== undefined)
+        .sort((a, b) => b[1][gameScoreField] - a[1][gameScoreField]);
+
+    return sortedStudents.slice(0, 3); // Get the top 3 students
+}
+
+// Helper function to update the DOM with top student achievements
+function updateTopStudentAchievement(elementId, topStudents, gameName) {
+    const element = document.getElementById(elementId);
+    element.innerHTML = `<h3>${gameName} Top Achievements</h3>`;
+
+    topStudents.forEach(([userId, userData], index) => {
+        const achievementCard = document.createElement('div');
+        achievementCard.className = 'card mb-3';
+
+        const cardBody = document.createElement('div');
+        cardBody.className = 'card-body';
+
+        const cardText = document.createElement('p');
+        cardText.className = 'card-text';
+        cardText.innerHTML = `<strong>${userData.username}</strong> - ${userData[gameScoreField]} Points`;
+
+        cardBody.appendChild(cardText);
+        achievementCard.appendChild(cardBody);
+        element.appendChild(achievementCard);
+    });
+}
+
+// ... Rest of your existing code ...
+
+// Call the function to fetch and display top achievements
+
+
+// function GetTopStudentAchievements() {
+//     const usersRef = ref(db, "Users");
+
+//     onValue(usersRef, (snapshot) => {
+//         const usersData = snapshot.val();
+
+//         // Find top students for each game
+//         const topStudentsEasyCode = findTopStudents(usersData, 'score3');
+//         const topStudentsTwistCode = findTopStudents(usersData, 'score');
+//         const topStudentsWordleCode = findTopStudents(usersData, 'score2');
+
+//         // Update the DOM with the top student achievements
+//         updateTopStudentAchievement('easyCodeAchievement', topStudentsEasyCode, 'EasyCode');
+//         updateTopStudentAchievement('twistCodeAchievement', topStudentsTwistCode, 'TwistCode');
+//         updateTopStudentAchievement('wordleCodeAchievement', topStudentsWordleCode, 'WordleCode');
+//     });
+// }
+
+// // Helper function to find top students for a specific game
+// function findTopStudents(usersData, gameScoreField) {
+//     const sortedStudents = Object.entries(usersData)
+//         .filter(([_, userData]) => userData[gameScoreField] !== undefined)
+//         .sort((a, b) => b[1][gameScoreField] - a[1][gameScoreField]);
+
+//     return sortedStudents.slice(0, 3); // Get the top 3 students
+// }
+
+// // Helper function to update the DOM with top student achievements
+// function updateTopStudentAchievement(elementId, topStudents, gameName) {
+//     const element = document.getElementById(elementId);
+//     element.innerHTML = `<h3>${gameName} Top Achievements</h3>`;
+
+//     topStudents.forEach(([userId, userData], index) => {
+//         const achievementCard = document.createElement('div');
+//         achievementCard.className = 'card mb-3';
+
+//         const cardBody = document.createElement('div');
+//         cardBody.className = 'card-body';
+
+//         const cardText = document.createElement('p');
+//         cardText.className = 'card-text';
+//         cardText.innerHTML = `<strong>${userData.username}</strong> - ${userData[gameScoreField]} Points`;
+
+//         cardBody.appendChild(cardText);
+//         achievementCard.appendChild(cardBody);
+//         element.appendChild(achievementCard);
+//     });
+// }
+
+
+/////////////////////////////////////////////////
+function GetAverageScores() {
+        const usersRef = ref(db, "Users");
+
+        onValue(usersRef, (snapshot) => {
+            const usersData = snapshot.val();
+            
+            const averageScores = {
+                EasyCode: 0,
+                TwistCode: 0,
+                WordleCode: 0
+            };
+
+            let totalStudentsCount = 0;
+
+            for (const userId in usersData) {
+                const userData = usersData[userId];
+                totalStudentsCount++;
+
+                averageScores.EasyCode += userData.score3 || 0;
+                averageScores.TwistCode += userData.score || 0;
+                averageScores.WordleCode += userData.score2 || 0;
+            }
+
+            if (totalStudentsCount > 0) {
+                averageScores.EasyCode /= totalStudentsCount;
+                averageScores.TwistCode /= totalStudentsCount;
+                averageScores.WordleCode /= totalStudentsCount;
+            }
+
+            // Update the chart
+            UpdateChart(averageScores);
+        });
+    }
+
+    function GetAverageScores2() {
+        const usersRef = ref(db, "Users");
+
+        onValue(usersRef, (snapshot) => {
+            const usersData = snapshot.val();
+            
+            const averageScores2 = {
+                EasyCode: 0,
+                TwistCode: 0,
+                WordleCode: 0
+            };
+
+            let totalStudentsCount = 0;
+
+            for (const userId in usersData) {
+                const userData = usersData[userId];
+                totalStudentsCount++;
+
+                averageScores2.EasyCode += userData.score3 || 0;
+                averageScores2.TwistCode += userData.score || 0;
+                averageScores2.WordleCode += userData.score2 || 0;
+            }
+
+            if (totalStudentsCount > 0) {
+                averageScores2.EasyCode /= totalStudentsCount;
+                averageScores2.TwistCode /= totalStudentsCount;
+                averageScores2.WordleCode /= totalStudentsCount;
+            }
+
+            // Update the chart
+            UpdateChart2(averageScores2);
+        });
+    }
+    function UpdateChart2(averageScores2) {
+        const ctx = document.getElementById('averageScoresChart2').getContext('2d');
+        
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['EasyCode', 'TwistCode', 'WordleCode'],
+                datasets: [{
+                    label: 'Average Scores',
+                    data: [
+                        averageScores2.EasyCode,
+                        averageScores2.TwistCode,
+                        averageScores2.WordleCode
+                    ],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+
+    function UpdateChart(averageScores) {
+        const ctx = document.getElementById('averageScoresChart').getContext('2d');
+        
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['EasyCode', 'TwistCode', 'WordleCode'],
+                datasets: [{
+                    label: 'Average Scores',
+                    data: [
+                        averageScores.EasyCode,
+                        averageScores.TwistCode,
+                        averageScores.WordleCode
+                    ],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+
+
+/////////////////////////////////////////////////////////////////////////////////
+	function GetTotalStudentsCount() {
+        const usersRef = ref(db, "Users");
+
+        onValue(usersRef, (snapshot) => {
+            const usersData = snapshot.val();
+            const totalStudentsCount = Object.keys(usersData).length;
+            document.getElementById('totalStudentsCount').textContent = totalStudentsCount;
+        });
+    }
+
+
+//--------------------------------------------- Filling Student Progress------------------------//	
+	var studentNo = 0;
+	function AddItemToTable2(userData) {
+	    let trow = document.createElement("tr");
+	    let td1 = document.createElement('td');
+	    let td2 = document.createElement('td');
+	    let td3 = document.createElement('td');
+	    let td4 = document.createElement('td');
+	    let td5 = document.createElement('td');
+
+	    td1.innerHTML = ++studentNo; // Increment student number
+	    td2.innerHTML = userData.username;
+	    td3.innerHTML = userData.score3; // EasyCode Game
+	    td4.innerHTML = userData.score;  // TwistCode Game
+	    td5.innerHTML = userData.score2; // WordleCode Game
+
+	    trow.appendChild(td1);
+	    trow.appendChild(td2);
+	    trow.appendChild(td3);
+	    trow.appendChild(td4);
+	    trow.appendChild(td5);
+
+	    const tbody2 = document.getElementById('tbody2');
+	    tbody2.appendChild(trow);
+	}
+
+	function AddAllUsersToTable(usersData) {
+	    studentNo = 0; // Reset the student number when repopulating the table
+	    const tbody2 = document.getElementById('tbody2');
+	    
+	    // Clear the existing table content
+	    tbody2.innerHTML = "";
+
+	    for (const userId in usersData) {
+	        const userData = usersData[userId];
+	        AddItemToTable2(userData);
+	    }
+	}
+
+	function GetAllUserScores() {
+	  const usersRef = ref(db, "Users");
+
+	  onValue(usersRef, (snapshot) => {
+	    const usersData = snapshot.val();
+	    AddAllUsersToTable(usersData);
+	  });
+	}
+
+	/*window.onload = GetAllUserScores;*/
+	window.onload = function () {
+
+	    GetAllUserScores();
+        GetTotalStudentsCount(); // Add this line to fetch and display the total student count
+		GetAverageScores(); // Add this line to fetch and display the average scores
+        GetAverageScores2();
+        GetTopAchievements();
+        GetTopStudentAchievements();
+	};
+
+
+	    // Define a single function that combines the two functions you want to run on load
+	    function onWindowLoad() {
+
+	        GetAllUserScores();
+			GetTotalStudentsCount(); // Add this line to fetch and display the total student count
+			GetAverageScores(); // Add this line to fetch and display the average scores
+            GetAverageScores2();
+            GetTopAchievements();
+            GetTopStudentAchievements();
+	    }
+
+	    window.onload = onWindowLoad;
+
+
+
+	</script>
+	    <!-- Link to Bootstrap JavaScript and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</div>
+</body>
+</html>
+
+
+
+
+
+
